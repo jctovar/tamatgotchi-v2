@@ -20,6 +20,8 @@ import '../models/pet_state.dart';
 import '../utils/constants.dart';
 import 'components/pet_sprite_component.dart';
 import 'components/pixel_grid_component.dart';
+import 'components/menu_overlay_component.dart';
+import '../providers/menu_provider.dart';
 
 /// Juego Flame que renderiza la pantalla LCD y la mascota.
 ///
@@ -30,8 +32,14 @@ class TamagotchiGame extends FlameGame {
   /// Componente de sprite de la mascota, creado durante [onLoad].
   late PetSpriteComponent _petSprite;
 
+  /// Componente que dibuja el overlay del menú, creado durante [onLoad].
+  late MenuOverlayComponent _menuOverlay;
+
   /// Último estado recibido desde Riverpod.
   PetState _currentState;
+
+  /// Último estado del menú recibido desde Riverpod.
+  MenuState _initialMenuState;
 
   /// Crea el juego con un [initialState] y una cámara de resolución fija.
   ///
@@ -40,8 +48,11 @@ class TamagotchiGame extends FlameGame {
   /// "viewport" lógico: los componentes se posicionan en esas coordenadas y Flame
   /// escala el resultado al tamaño físico del widget, manteniendo la proporción y
   /// el aspecto de pantalla retro sin importar el tamaño del contenedor.
-  TamagotchiGame({required PetState initialState})
-      : _currentState = initialState,
+  TamagotchiGame({
+    required PetState initialState,
+    required MenuState initialMenuState,
+  })  : _currentState = initialState,
+        _initialMenuState = initialMenuState,
         super(
           camera: CameraComponent.withFixedResolution(
             width: Constants.lcdWidth.toDouble(),
@@ -77,6 +88,9 @@ class TamagotchiGame extends FlameGame {
       size: Vector2(32, 32),
     );
     world.add(_petSprite);
+
+    _menuOverlay = MenuOverlayComponent()..updateMenuState(_initialMenuState);
+    world.add(_menuOverlay);
   }
 
   /// Punto de entrada "Riverpod → Flame" para cambios de estado.
@@ -93,5 +107,20 @@ class TamagotchiGame extends FlameGame {
   /// Reproduce la animación puntual asociada a [action] en el sprite.
   void onAction(PetAction action) {
     _petSprite.playOneShot(action);
+  }
+
+  /// Punto de entrada "Riverpod → Flame" para cambios del menú.
+  ///
+  /// Empuja el nuevo estado del menú (visibilidad y selección) al overlay.
+  void onMenuChanged(MenuState newState) {
+    _menuOverlay.updateMenuState(newState);
+  }
+
+  /// Punto de entrada "Flutter → Flame" para cambios de idioma.
+  ///
+  /// Empuja las etiquetas localizadas de las opciones del menú al overlay,
+  /// en el mismo orden que `MenuItem.values`.
+  void onLocaleChanged(List<String> labels) {
+    _menuOverlay.updateLabels(labels);
   }
 }
