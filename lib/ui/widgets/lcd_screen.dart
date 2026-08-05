@@ -1,9 +1,24 @@
+/// Marco físico de la pantalla LCD.
+///
+/// Este archivo define [LcdScreen], el widget que dibuja el bisel oscuro alrededor
+/// de la pantalla y aloja en su interior el motor de juego ([GameScreen]). Es un
+/// componente de presentación puro: solo decora y recorta el contenido, sin estado
+/// ni lógica. El recorte con bordes redondeados refuerza la estética de pantalla
+/// retro incrustada en la carcasa.
+library;
+
 import 'package:flutter/material.dart';
 import '../../game/widgets/game_screen.dart';
 
+/// Bisel oscuro que enmarca y recorta la pantalla del juego.
+///
+/// Contiene un [GameScreen] (el motor Flame) dentro de un [ClipRRect] para que el
+/// renderizado del juego quede limitado al área visible de la pantalla LCD.
 class LcdScreen extends StatelessWidget {
+  /// Crea el marco de la pantalla LCD.
   const LcdScreen({super.key});
 
+  /// Construye el bisel con el área de juego recortada en su interior.
   @override
   Widget build(BuildContext context) {
     return Container(
