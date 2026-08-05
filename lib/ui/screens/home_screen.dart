@@ -1,26 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../lifecycle_observer.dart';
 import '../../providers/menu_provider.dart';
 import '../../providers/pet_controller.dart';
 import '../widgets/tamagotchi_shell.dart';
 
-class HomeScreen extends ConsumerWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends ConsumerState<HomeScreen> {
+  late final LifecycleObserver _observer;
+
+  @override
+  void initState() {
+    super.initState();
+    _observer = LifecycleObserver(ref);
+    _observer.register();
+  }
+
+  @override
+  void dispose() {
+    _observer.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: TamagotchiShell(
-          onButtonA: () => _handleA(ref),
-          onButtonB: () => _handleB(ref),
-          onButtonC: () => _handleC(ref),
+          onButtonA: _handleA,
+          onButtonB: _handleB,
+          onButtonC: _handleC,
         ),
       ),
     );
   }
 
-  void _handleA(WidgetRef ref) {
+  void _handleA() {
     final menu = ref.read(menuProvider);
     if (!menu.isVisible) {
       ref.read(menuProvider.notifier).toggle();
@@ -29,7 +50,7 @@ class HomeScreen extends ConsumerWidget {
     }
   }
 
-  void _handleB(WidgetRef ref) {
+  void _handleB() {
     final menu = ref.read(menuProvider);
     if (!menu.isVisible) return;
 
@@ -51,7 +72,7 @@ class HomeScreen extends ConsumerWidget {
     ref.read(menuProvider.notifier).hide();
   }
 
-  void _handleC(WidgetRef ref) {
+  void _handleC() {
     ref.read(menuProvider.notifier).hide();
   }
 }

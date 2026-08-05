@@ -37,6 +37,7 @@ dependencies:
   shared_preferences: ^2.2.2
   logger: ^2.0.2
   flutter_local_notifications: ^17.0.0
+  timezone: ^0.9.4
   audioplayers: ^6.0.0
   freezed_annotation: ^3.0.0
   json_annotation: ^4.12.0
