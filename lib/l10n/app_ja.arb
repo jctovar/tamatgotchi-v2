@@ -1,0 +1,17 @@
+{
+  "@@locale": "ja",
+  "appTitle": "たまごっち",
+  "hunger": "おなか",
+  "happiness": "しあわせ",
+  "health": "けんこう",
+  "weight": "たいじゅう",
+  "age": "ねんれい",
+  "menuFood": "ごはん",
+  "menuLight": "ライト",
+  "menuPlay": "あそぶ",
+  "menuMedicine": "くすり",
+  "menuStatus": "ステータス",
+  "menuGame": "ゲーム",
+  "petDead": "ペットは天国に旅立ちました...",
+  "lastFed": "最後の食事: {time}"
+}

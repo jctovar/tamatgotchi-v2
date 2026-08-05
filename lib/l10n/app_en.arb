@@ -1,0 +1,22 @@
+{
+  "@@locale": "en",
+  "appTitle": "Tamagotchi",
+  "hunger": "Hunger",
+  "happiness": "Happiness",
+  "health": "Health",
+  "weight": "Weight",
+  "age": "Age",
+  "menuFood": "Food",
+  "menuLight": "Light",
+  "menuPlay": "Play",
+  "menuMedicine": "Medicine",
+  "menuStatus": "Status",
+  "menuGame": "Game",
+  "petDead": "Your pet has passed away...",
+  "lastFed": "Last fed: {time}",
+  "@lastFed": {
+    "placeholders": {
+      "time": { "type": "String" }
+    }
+  }
+}

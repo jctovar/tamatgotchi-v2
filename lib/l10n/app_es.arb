@@ -1,0 +1,17 @@
+{
+  "@@locale": "es",
+  "appTitle": "Tamagotchi",
+  "hunger": "Hambre",
+  "happiness": "Felicidad",
+  "health": "Salud",
+  "weight": "Peso",
+  "age": "Edad",
+  "menuFood": "Comida",
+  "menuLight": "Luz",
+  "menuPlay": "Jugar",
+  "menuMedicine": "Medicina",
+  "menuStatus": "Estado",
+  "menuGame": "Juego",
+  "petDead": "Tu mascota ha fallecido...",
+  "lastFed": "Ultima comida: {time}"
+}
