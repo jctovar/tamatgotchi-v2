@@ -2,6 +2,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/pet_action.dart';
 import '../models/pet_state.dart';
+import '../services/audio_service.dart';
 import '../services/persistence_service.dart';
 import '../services/time_engine.dart';
 import 'flame_action_provider.dart';
@@ -38,6 +39,7 @@ class PetController extends Notifier<PetState> {
       lastUpdated: DateTime.now(),
     ));
     ref.read(flameActionProvider).trigger(PetAction.feed);
+    AudioService.play(PetAction.feed);
   }
 
   void play() {
@@ -49,6 +51,7 @@ class PetController extends Notifier<PetState> {
       lastUpdated: DateTime.now(),
     ));
     ref.read(flameActionProvider).trigger(PetAction.play);
+    AudioService.play(PetAction.play);
   }
 
   void clean() {
@@ -58,6 +61,7 @@ class PetController extends Notifier<PetState> {
       lastUpdated: DateTime.now(),
     ));
     ref.read(flameActionProvider).trigger(PetAction.clean);
+    AudioService.play(PetAction.clean);
   }
 
   void useMedicine() {
@@ -67,6 +71,7 @@ class PetController extends Notifier<PetState> {
       lastUpdated: DateTime.now(),
     ));
     ref.read(flameActionProvider).trigger(PetAction.medicine);
+    AudioService.play(PetAction.medicine);
   }
 
   void toggleLight() {
@@ -75,11 +80,13 @@ class PetController extends Notifier<PetState> {
       lastUpdated: DateTime.now(),
     ));
     ref.read(flameActionProvider).trigger(PetAction.toggleLight);
+    AudioService.play(PetAction.toggleLight);
   }
 
   void sleep() {
     _commit(state.copyWith(isSleeping: true, lastUpdated: DateTime.now()));
     ref.read(flameActionProvider).trigger(PetAction.sleep);
+    AudioService.play(PetAction.sleep);
   }
 
   void wake() {
