@@ -11,6 +11,10 @@
 ///   [TamagotchiGame.onStateChanged].
 /// * `Riverpod → Flame` (eventos): emisiones de [flameActionProvider] →
 ///   [TamagotchiGame.onAction].
+/// * `Riverpod → Flame` (menú): cambios de [menuProvider] →
+///   [TamagotchiGame.onMenuChanged].
+/// * `Flutter → Flame` (idioma): cambios de [AppLocalizations] →
+///   [TamagotchiGame.onLocaleChanged].
 library;
 
 import 'package:flame/game.dart';
@@ -62,31 +66,18 @@ class _GameScreenState extends ConsumerState<GameScreen> {
   /// dependencias de [BuildContext] (por ejemplo, si cambia el locale del
   /// sistema en caliente). No se hace en [build] para no reenviar las
   /// etiquetas en cada reconstrucción no relacionada con el idioma.
-  ///
-  /// `didChangeDependencies` se ejecuta de forma síncrona durante el montaje
-  /// inicial del widget, antes de que exista el [GameWidget] y, por tanto,
-  /// antes de que `TamagotchiGame.onLoad` (asíncrono) haya podido inicializar
-  /// el overlay del menú. Por eso se espera a [TamagotchiGame.loaded] —el
-  /// future de Flame que se resuelve cuando termina `onLoad`— antes de llamar
-  /// a [TamagotchiGame.onLocaleChanged]; llamarlo antes provocaría un
-  /// `LateInitializationError` sobre el campo `late` del overlay.
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     final l10n = AppLocalizations.of(context)!;
-    final labels = [
+    _game.onLocaleChanged([
       l10n.menuFood,
       l10n.menuLight,
       l10n.menuPlay,
       l10n.menuMedicine,
       l10n.menuStatus,
       l10n.menuGame,
-    ];
-    _game.loaded.then((_) {
-      if (mounted) {
-        _game.onLocaleChanged(labels);
-      }
-    });
+    ]);
   }
 
   /// Construye el [GameWidget] y registra las escuchas de Riverpod.

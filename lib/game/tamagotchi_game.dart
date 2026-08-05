@@ -4,7 +4,9 @@
 /// la pantalla estilo Game Boy (160×144) donde vive la mascota. En la arquitectura
 /// unidireccional, el motor es una vista reactiva de solo lectura: recibe el
 /// estado desde Riverpod (vía [onStateChanged]) y eventos de acción (vía
-/// [onAction]), pero nunca muta el estado por sí mismo.
+/// [onAction]), y además recibe cambios del estado del menú (vía
+/// [onMenuChanged]) y del idioma (vía [onLocaleChanged]), pero nunca muta el
+/// estado por sí mismo.
 ///
 /// La cámara usa una resolución fija de 160×144 para que el contenido se dibuje
 /// en coordenadas "lógicas" de píxel y Flame lo escale automáticamente al tamaño
@@ -26,20 +28,19 @@ import '../providers/menu_provider.dart';
 /// Juego Flame que renderiza la pantalla LCD y la mascota.
 ///
 /// Actúa como punto de entrada del motor: crea la cámara con resolución fija,
-/// carga los componentes del mundo y expone dos métodos ([onStateChanged] y
-/// [onAction]) para que la capa Riverpod le comunique cambios de estado y eventos.
+/// carga los componentes del mundo y expone cuatro métodos puente
+/// ([onStateChanged], [onAction], [onMenuChanged] y [onLocaleChanged]) para
+/// que la capa Riverpod y la capa Flutter le comuniquen cambios de estado,
+/// eventos, cambios del menú y cambios de idioma.
 class TamagotchiGame extends FlameGame {
   /// Componente de sprite de la mascota, creado durante [onLoad].
   late PetSpriteComponent _petSprite;
 
-  /// Componente que dibuja el overlay del menú, creado durante [onLoad].
-  late MenuOverlayComponent _menuOverlay;
+  /// Componente que dibuja el overlay del menú.
+  final MenuOverlayComponent _menuOverlay = MenuOverlayComponent();
 
   /// Último estado recibido desde Riverpod.
   PetState _currentState;
-
-  /// Último estado del menú recibido desde Riverpod.
-  MenuState _initialMenuState;
 
   /// Crea el juego con un [initialState] y una cámara de resolución fija.
   ///
@@ -52,13 +53,14 @@ class TamagotchiGame extends FlameGame {
     required PetState initialState,
     required MenuState initialMenuState,
   })  : _currentState = initialState,
-        _initialMenuState = initialMenuState,
         super(
           camera: CameraComponent.withFixedResolution(
             width: Constants.lcdWidth.toDouble(),
             height: Constants.lcdHeight.toDouble(),
           ),
-        );
+        ) {
+    _menuOverlay.updateMenuState(initialMenuState);
+  }
 
   /// Color de fondo de la pantalla LCD (verde Game Boy).
   @override
@@ -89,7 +91,6 @@ class TamagotchiGame extends FlameGame {
     );
     world.add(_petSprite);
 
-    _menuOverlay = MenuOverlayComponent()..updateMenuState(_initialMenuState);
     world.add(_menuOverlay);
   }
 

@@ -99,7 +99,7 @@ lib/
 │   └── menu_provider.dart        # Navegación del menú LCD.
 ├── game/
 │   ├── tamagotchi_game.dart      # FlameGame, cámara y viewport 160×144.
-│   ├── components/               # PetSprite, rejilla de píxeles.
+│   ├── components/               # PetSprite, rejilla de píxeles, overlay del menú.
 │   └── widgets/game_screen.dart  # Puente Riverpod ↔ Flame.
 ├── ui/
 │   ├── screens/                  # HomeScreen, AboutScreen.

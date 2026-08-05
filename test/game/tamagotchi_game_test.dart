@@ -13,7 +13,7 @@ void main() {
       'loads with initial state',
       () => TamagotchiGame(
         initialState: PetState.initial(),
-        initialMenuState: const MenuState(),
+        initialMenuState: const MenuState(selectedIndex: 2, isVisible: true),
       ),
       (game) async {
         // PetSpriteComponent decodes the spritesheet asynchronously, so wait
@@ -23,6 +23,12 @@ void main() {
 
         // PixelGridComponent + PetSpriteComponent + MenuOverlayComponent.
         expect(game.world.children.length, greaterThanOrEqualTo(3));
+
+        // The constructor's initialMenuState must actually seed the overlay.
+        final overlay =
+            game.world.children.whereType<MenuOverlayComponent>().single;
+        expect(overlay.menuState.isVisible, true);
+        expect(overlay.menuState.selectedIndex, 2);
       },
     );
 

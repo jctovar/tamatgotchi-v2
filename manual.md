@@ -12,8 +12,8 @@ Tienes delante un Tamagotchi clásico:
 - Una **pantalla LCD** verde (estilo Game Boy) donde vive tu mascota.
 - **Tres botones físicos** debajo de la pantalla: **A**, **B** y **C**.
 
-La pantalla muestra a tu mascota animada y, cuando abres el menú, una lista de iconos
-para elegir qué hacer.
+La pantalla muestra a tu mascota animada y, cuando abres el menú, una lista de opciones
+de texto para elegir qué hacer.
 
 ---
 
