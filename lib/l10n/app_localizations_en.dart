@@ -27,6 +27,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get age => 'Age';
 
   @override
+  String get stage => 'Stage';
+
+  @override
   String get menuFood => 'Food';
 
   @override
@@ -51,4 +54,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String lastFed(String time) {
     return 'Last fed: $time';
   }
+
+  @override
+  String get aboutTitle => 'About';
+
+  @override
+  String get notificationHungerBody => 'Your pet is hungry!';
+
+  @override
+  String get notificationSickBody => 'Your pet is sick!';
 }

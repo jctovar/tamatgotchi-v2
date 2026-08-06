@@ -100,89 +100,113 @@ abstract class AppLocalizations {
     Locale('ja'),
   ];
 
-  /// No description provided for @appTitle.
+  /// Título de la aplicación.
   ///
   /// In en, this message translates to:
   /// **'Tamagotchi'**
   String get appTitle;
 
-  /// No description provided for @hunger.
+  /// Etiqueta de la estadística de saciedad/hambre.
   ///
   /// In en, this message translates to:
   /// **'Hunger'**
   String get hunger;
 
-  /// No description provided for @happiness.
+  /// Etiqueta de la estadística de felicidad.
   ///
   /// In en, this message translates to:
   /// **'Happiness'**
   String get happiness;
 
-  /// No description provided for @health.
+  /// Etiqueta de la estadística de salud.
   ///
   /// In en, this message translates to:
   /// **'Health'**
   String get health;
 
-  /// No description provided for @weight.
+  /// Etiqueta de la estadística de peso.
   ///
   /// In en, this message translates to:
   /// **'Weight'**
   String get weight;
 
-  /// No description provided for @age.
+  /// Etiqueta de la estadística de edad.
   ///
   /// In en, this message translates to:
   /// **'Age'**
   String get age;
 
-  /// No description provided for @menuFood.
+  /// Etiqueta de la etapa evolutiva de la mascota.
+  ///
+  /// In en, this message translates to:
+  /// **'Stage'**
+  String get stage;
+
+  /// Opción del menú para alimentar a la mascota.
   ///
   /// In en, this message translates to:
   /// **'Food'**
   String get menuFood;
 
-  /// No description provided for @menuLight.
+  /// Opción del menú para encender/apagar la luz.
   ///
   /// In en, this message translates to:
   /// **'Light'**
   String get menuLight;
 
-  /// No description provided for @menuPlay.
+  /// Opción del menú para jugar con la mascota.
   ///
   /// In en, this message translates to:
   /// **'Play'**
   String get menuPlay;
 
-  /// No description provided for @menuMedicine.
+  /// Opción del menú para dar medicina a la mascota.
   ///
   /// In en, this message translates to:
   /// **'Medicine'**
   String get menuMedicine;
 
-  /// No description provided for @menuStatus.
+  /// Opción del menú para ver el estado (reservada).
   ///
   /// In en, this message translates to:
   /// **'Status'**
   String get menuStatus;
 
-  /// No description provided for @menuGame.
+  /// Opción del menú para el mini-juego (reservada).
   ///
   /// In en, this message translates to:
   /// **'Game'**
   String get menuGame;
 
-  /// No description provided for @petDead.
+  /// Mensaje mostrado cuando la mascota ha muerto.
   ///
   /// In en, this message translates to:
   /// **'Your pet has passed away...'**
   String get petDead;
 
-  /// No description provided for @lastFed.
+  /// Indica cuándo se alimentó por última vez a la mascota.
   ///
   /// In en, this message translates to:
   /// **'Last fed: {time}'**
   String lastFed(String time);
+
+  /// Título de la pantalla 'Acerca de'.
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get aboutTitle;
+
+  /// Cuerpo de la notificación de aviso de hambre.
+  ///
+  /// In en, this message translates to:
+  /// **'Your pet is hungry!'**
+  String get notificationHungerBody;
+
+  /// Cuerpo de la notificación de aviso de enfermedad.
+  ///
+  /// In en, this message translates to:
+  /// **'Your pet is sick!'**
+  String get notificationSickBody;
 }
 
 class _AppLocalizationsDelegate

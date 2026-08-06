@@ -23,5 +23,14 @@ void main() {
       final loaded = await PersistenceService.load();
       expect(loaded, isNull);
     });
+
+    test('clear removes the saved state', () async {
+      await PersistenceService.save(PetState.initial());
+
+      await PersistenceService.clear();
+
+      final loaded = await PersistenceService.load();
+      expect(loaded, isNull);
+    });
   });
 }

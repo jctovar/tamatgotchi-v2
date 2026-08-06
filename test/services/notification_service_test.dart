@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:tamagotchi/l10n/app_localizations_es.dart';
 import 'package:tamagotchi/models/pet_state.dart';
 import 'package:tamagotchi/services/notification_service.dart';
 
@@ -9,6 +10,7 @@ void main() {
 
   const channel = MethodChannel('dexterous.com/flutter/local_notifications');
   final calls = <MethodCall>[];
+  final l10n = AppLocalizationsEs();
 
   PetState stateWith({
     double hunger = 100.0,
@@ -55,7 +57,7 @@ void main() {
 
   group('NotificationService.scheduleWarnings', () {
     test('cancela los avisos previos antes de evaluar el estado', () async {
-      await NotificationService.scheduleWarnings(stateWith());
+      await NotificationService.scheduleWarnings(stateWith(), l10n);
 
       expect(calls.first.method, 'cancelAll');
     });
@@ -63,6 +65,7 @@ void main() {
     test('no programa avisos si la mascota esta muerta', () async {
       await NotificationService.scheduleWarnings(
         stateWith(isAlive: false, hunger: 5, health: 5),
+        l10n,
       );
 
       expect(calls.map((c) => c.method), ['cancelAll']);
@@ -73,6 +76,7 @@ void main() {
       () async {
         await NotificationService.scheduleWarnings(
           stateWith(hunger: 80, health: 80),
+          l10n,
         );
 
         expect(calls.map((c) => c.method), ['cancelAll']);
@@ -83,6 +87,7 @@ void main() {
         'umbral', () async {
       await NotificationService.scheduleWarnings(
         stateWith(hunger: 20, health: 80),
+        l10n,
       );
 
       expect(calls.map((c) => c.method), ['cancelAll', 'zonedSchedule']);
@@ -95,6 +100,7 @@ void main() {
         'umbral', () async {
       await NotificationService.scheduleWarnings(
         stateWith(hunger: 80, health: 10),
+        l10n,
       );
 
       expect(calls.map((c) => c.method), ['cancelAll', 'zonedSchedule']);
@@ -107,6 +113,7 @@ void main() {
         'sus umbrales', () async {
       await NotificationService.scheduleWarnings(
         stateWith(hunger: 10, health: 10),
+        l10n,
       );
 
       final scheduled = calls.where((c) => c.method == 'zonedSchedule');
@@ -123,6 +130,7 @@ void main() {
       () async {
         await NotificationService.scheduleWarnings(
           stateWith(hunger: 40, health: 80),
+          l10n,
         );
 
         expect(calls.map((c) => c.method), ['cancelAll']);

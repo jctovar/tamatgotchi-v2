@@ -13,6 +13,7 @@ library;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../lifecycle_observer.dart';
+import '../../l10n/app_localizations.dart';
 import '../../providers/menu_provider.dart';
 import '../../providers/pet_controller.dart';
 import '../widgets/tamagotchi_shell.dart';
@@ -48,6 +49,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   void dispose() {
     _observer.dispose();
     super.dispose();
+  }
+
+  /// Empuja las cadenas localizadas al observador de ciclo de vida.
+  ///
+  /// Se ejecuta al montar la pantalla y de nuevo si cambia el idioma del sistema,
+  /// para que los avisos de notificación se programen en el idioma activo.
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _observer.updateL10n(AppLocalizations.of(context)!);
   }
 
   /// Construye la interfaz centrando la carcasa del Tamagotchi.

@@ -27,6 +27,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get age => 'ねんれい';
 
   @override
+  String get stage => 'せいちょう';
+
+  @override
   String get menuFood => 'ごはん';
 
   @override
@@ -45,10 +48,19 @@ class AppLocalizationsJa extends AppLocalizations {
   String get menuGame => 'ゲーム';
 
   @override
-  String get petDead => 'ペットは天国に旅立ちました...';
+  String get petDead => 'ペットは天国へ旅立ってしまいました...';
 
   @override
   String lastFed(String time) {
     return '最後の食事: $time';
   }
+
+  @override
+  String get aboutTitle => 'このアプリについて';
+
+  @override
+  String get notificationHungerBody => 'ペットはお腹がすいています!';
+
+  @override
+  String get notificationSickBody => 'ペットが病気です!';
 }

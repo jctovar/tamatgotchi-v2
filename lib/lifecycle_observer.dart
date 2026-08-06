@@ -13,6 +13,8 @@ library;
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'l10n/app_localizations.dart';
+import 'l10n/app_localizations_en.dart';
 import 'providers/pet_controller.dart';
 import 'services/notification_service.dart';
 
@@ -25,8 +27,16 @@ class LifecycleObserver with WidgetsBindingObserver {
   /// Referencia a Riverpod para interactuar con los proveedores.
   final WidgetRef ref;
 
+  /// Últimas cadenas localizadas, empujadas por la UI al cambiar el idioma.
+  AppLocalizations _l10n = AppLocalizationsEn();
+
   /// Crea el observador con la referencia [ref] a Riverpod.
   LifecycleObserver(this.ref);
+
+  /// Actualiza las cadenas localizadas usadas al programar avisos.
+  void updateL10n(AppLocalizations l10n) {
+    _l10n = l10n;
+  }
 
   /// Registra este observador en el [WidgetsBinding] para recibir eventos.
   void register() {
@@ -51,7 +61,7 @@ class LifecycleObserver with WidgetsBindingObserver {
     switch (state) {
       case AppLifecycleState.paused:
         final petState = ref.read(petControllerProvider);
-        NotificationService.scheduleWarnings(petState);
+        NotificationService.scheduleWarnings(petState, _l10n);
       case AppLifecycleState.resumed:
         NotificationService.cancelAll();
         ref.read(petControllerProvider.notifier).applyTimeDecay();

@@ -30,6 +30,20 @@ void main() {
       expect(state.clampedHunger, 100.0);
     });
 
+    test('clampedHappiness clamps between 0 and 100', () {
+      final over = PetState.initial().copyWith(happiness: 150.0);
+      final under = PetState.initial().copyWith(happiness: -10.0);
+      expect(over.clampedHappiness, 100.0);
+      expect(under.clampedHappiness, 0.0);
+    });
+
+    test('clampedHealth clamps between 0 and 100', () {
+      final over = PetState.initial().copyWith(health: 150.0);
+      final under = PetState.initial().copyWith(health: -10.0);
+      expect(over.clampedHealth, 100.0);
+      expect(under.clampedHealth, 0.0);
+    });
+
     test('toJson/fromJson roundtrip preserves all fields', () {
       final state = PetState.initial().copyWith(age: const Duration(hours: 3));
       final json = state.toJson();

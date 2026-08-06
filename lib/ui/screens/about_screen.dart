@@ -9,6 +9,7 @@ library;
 // lib/ui/screens/about_screen.dart
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import '../../l10n/app_localizations.dart';
 
 /// Pantalla que muestra el nombre y la versión de la aplicación.
 ///
@@ -23,7 +24,7 @@ class AboutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('About')),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.aboutTitle)),
       body: FutureBuilder<PackageInfo>(
         future: PackageInfo.fromPlatform(),
         builder: (context, snapshot) {

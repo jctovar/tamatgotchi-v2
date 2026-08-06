@@ -27,6 +27,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get age => 'Edad';
 
   @override
+  String get stage => 'Etapa';
+
+  @override
   String get menuFood => 'Comida';
 
   @override
@@ -49,6 +52,15 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String lastFed(String time) {
-    return 'Ultima comida: $time';
+    return 'Última comida: $time';
   }
+
+  @override
+  String get aboutTitle => 'Acerca de';
+
+  @override
+  String get notificationHungerBody => 'Tu mascota tiene hambre!';
+
+  @override
+  String get notificationSickBody => 'Tu mascota está enferma!';
 }

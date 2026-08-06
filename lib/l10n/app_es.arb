@@ -6,6 +6,7 @@
   "health": "Salud",
   "weight": "Peso",
   "age": "Edad",
+  "stage": "Etapa",
   "menuFood": "Comida",
   "menuLight": "Luz",
   "menuPlay": "Jugar",
@@ -13,5 +14,15 @@
   "menuStatus": "Estado",
   "menuGame": "Juego",
   "petDead": "Tu mascota ha fallecido...",
-  "lastFed": "Ultima comida: {time}"
+  "lastFed": "Última comida: {time}",
+  "@lastFed": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "aboutTitle": "Acerca de",
+  "notificationHungerBody": "Tu mascota tiene hambre!",
+  "notificationSickBody": "Tu mascota está enferma!"
 }

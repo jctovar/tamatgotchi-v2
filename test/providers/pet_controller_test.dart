@@ -51,10 +51,53 @@ void main() {
       expect(state.health, greaterThan(50.0));
       container2.dispose();
     });
+
+    test('clean increases health', () {
+      final container2 = ProviderContainer(
+        overrides: [
+          petControllerProvider.overrideWith(() => _SickPetController()),
+        ],
+      );
+      container2.read(petControllerProvider.notifier).clean();
+      final state = container2.read(petControllerProvider);
+      expect(state.health, greaterThan(50.0));
+      container2.dispose();
+    });
+
+    test('clean has no effect when the pet is dead', () {
+      final container2 = ProviderContainer(
+        overrides: [
+          petControllerProvider
+              .overrideWith(() => _DeadPetController()),
+        ],
+      );
+      final before = container2.read(petControllerProvider).health;
+      container2.read(petControllerProvider.notifier).clean();
+      final after = container2.read(petControllerProvider);
+      expect(after.health, before);
+      expect(after, same(container2.read(petControllerProvider)));
+      container2.dispose();
+    });
+
+    test('sleep sets isSleeping to true', () {
+      container.read(petControllerProvider.notifier).sleep();
+      expect(container.read(petControllerProvider).isSleeping, true);
+    });
+
+    test('wake sets isSleeping to false without emitting an action', () {
+      container.read(petControllerProvider.notifier).sleep();
+      container.read(petControllerProvider.notifier).wake();
+      expect(container.read(petControllerProvider).isSleeping, false);
+    });
   });
 }
 
 class _SickPetController extends PetController {
   @override
   PetState build() => PetState.initial().copyWith(health: 50.0);
+}
+
+class _DeadPetController extends PetController {
+  @override
+  PetState build() => PetState.initial().copyWith(health: 0.0, isAlive: false);
 }

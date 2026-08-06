@@ -13,6 +13,7 @@ library;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/data/latest_all.dart' as tz_data;
 import 'package:timezone/timezone.dart' as tz;
+import '../l10n/app_localizations.dart';
 import '../models/pet_state.dart';
 import '../utils/constants.dart';
 
@@ -49,8 +50,12 @@ abstract final class NotificationService {
   ///
   /// Cancela primero cualquier aviso previo para no duplicar notificaciones y, si
   /// la mascota sigue viva, programa un recordatorio de hambre y/o de enfermedad
-  /// según los umbrales definidos en [Constants].
-  static Future<void> scheduleWarnings(PetState state) async {
+  /// según los umbrales definidos en [Constants]. Los textos del aviso se toman
+  /// de [l10n] para respetar el idioma activo de la aplicación.
+  static Future<void> scheduleWarnings(
+    PetState state,
+    AppLocalizations l10n,
+  ) async {
     await cancelAll();
     if (!state.isAlive) return;
 
@@ -58,8 +63,8 @@ abstract final class NotificationService {
     if (state.hunger < Constants.hungerWarningThreshold) {
       await _schedule(
         id: 1,
-        title: 'Tamagotchi',
-        body: 'Tu mascota tiene hambre!',
+        title: l10n.appTitle,
+        body: l10n.notificationHungerBody,
         delay: const Duration(minutes: 30),
       );
     }
@@ -68,8 +73,8 @@ abstract final class NotificationService {
     if (state.health < Constants.healthWarningThreshold) {
       await _schedule(
         id: 2,
-        title: 'Tamagotchi',
-        body: 'Tu mascota esta enferma!',
+        title: l10n.appTitle,
+        body: l10n.notificationSickBody,
         delay: const Duration(minutes: 15),
       );
     }

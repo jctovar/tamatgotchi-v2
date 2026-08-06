@@ -1,22 +1,80 @@
 {
   "@@locale": "en",
   "appTitle": "Tamagotchi",
+  "@appTitle": {
+    "description": "Título de la aplicación."
+  },
   "hunger": "Hunger",
+  "@hunger": {
+    "description": "Etiqueta de la estadística de saciedad/hambre."
+  },
   "happiness": "Happiness",
+  "@happiness": {
+    "description": "Etiqueta de la estadística de felicidad."
+  },
   "health": "Health",
+  "@health": {
+    "description": "Etiqueta de la estadística de salud."
+  },
   "weight": "Weight",
+  "@weight": {
+    "description": "Etiqueta de la estadística de peso."
+  },
   "age": "Age",
+  "@age": {
+    "description": "Etiqueta de la estadística de edad."
+  },
+  "stage": "Stage",
+  "@stage": {
+    "description": "Etiqueta de la etapa evolutiva de la mascota."
+  },
   "menuFood": "Food",
+  "@menuFood": {
+    "description": "Opción del menú para alimentar a la mascota."
+  },
   "menuLight": "Light",
+  "@menuLight": {
+    "description": "Opción del menú para encender/apagar la luz."
+  },
   "menuPlay": "Play",
+  "@menuPlay": {
+    "description": "Opción del menú para jugar con la mascota."
+  },
   "menuMedicine": "Medicine",
+  "@menuMedicine": {
+    "description": "Opción del menú para dar medicina a la mascota."
+  },
   "menuStatus": "Status",
+  "@menuStatus": {
+    "description": "Opción del menú para ver el estado (reservada)."
+  },
   "menuGame": "Game",
+  "@menuGame": {
+    "description": "Opción del menú para el mini-juego (reservada)."
+  },
   "petDead": "Your pet has passed away...",
+  "@petDead": {
+    "description": "Mensaje mostrado cuando la mascota ha muerto."
+  },
   "lastFed": "Last fed: {time}",
   "@lastFed": {
+    "description": "Indica cuándo se alimentó por última vez a la mascota.",
     "placeholders": {
-      "time": { "type": "String" }
+      "time": {
+        "type": "String"
+      }
     }
+  },
+  "aboutTitle": "About",
+  "@aboutTitle": {
+    "description": "Título de la pantalla 'Acerca de'."
+  },
+  "notificationHungerBody": "Your pet is hungry!",
+  "@notificationHungerBody": {
+    "description": "Cuerpo de la notificación de aviso de hambre."
+  },
+  "notificationSickBody": "Your pet is sick!",
+  "@notificationSickBody": {
+    "description": "Cuerpo de la notificación de aviso de enfermedad."
   }
 }
