@@ -160,8 +160,8 @@ El proyecto soporta **Español, Inglés y Japonés**. Las cadenas viven en `lib/
 
 - La **pantalla "Acerca de"** (`AboutScreen`) está implementada pero aún **no es alcanzable**
   desde la navegación (el plan no especificó cómo cablearla al menú).
-- El sprite usa una **hoja de sprites placeholder** (bloques de color); el arte definitivo es
-  una mejora pendiente.
+- El sprite usa una **hoja de sprites placeholder** (un blob simple generado por script,
+  no arte final); el arte definitivo es una mejora pendiente.
 - El sonido es **best-effort**: se silencia en entornos sin plataforma de audio (p. ej. tests).
 
 ---
